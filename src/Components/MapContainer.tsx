@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Cat from '../Interfaces/Cat';
 import Coordinates from '../Types/Coordinates';
-import { map } from '../map';
+import createMap from '../createMap';
 import axios from 'axios';
 
 export default function MapContainer() {
@@ -15,8 +15,10 @@ export default function MapContainer() {
 	useEffect(() => {
 		axios
 			.get('/api/users/cm3op7iwu0000jrcqa60tc9kv/devices')
-			.then((response: any) => { // Needs better type
-				const updatedCats = response.data.data.map((device: any) => { // Needs better type
+			.then((response: any) => {
+				// Needs better type
+				const updatedCats = response.data.data.map((device: any) => {
+					// Needs better type
 					// Black image for now as no there's images column
 					return {
 						name: device.name,
@@ -29,7 +31,7 @@ export default function MapContainer() {
 			});
 	}, []);
 
-	useEffect(() => map(mapContainer, home, cats, map), [cats]);
+	useEffect(() => createMap(mapContainer, home, cats, map), [cats]);
 
 	return <div style={{ width: '800px', height: '550px' }} ref={mapContainer} />;
 }
