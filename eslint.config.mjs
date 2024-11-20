@@ -14,7 +14,7 @@ const compat = new FlatCompat({
 });
 
 export default [
-	...compat.extends('plugin:react/recommended', 'airbnb', 'prettier'),
+	...compat.extends('plugin:react/recommended', 'prettier'),
 	{
 		plugins: {
 			react,

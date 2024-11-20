@@ -11,8 +11,15 @@ export default function Map({ cats }: { cats: Cat[] }) {
 	const home: Coordinates = [-1.45054, 53.80619];
 
 	useEffect(() => {
-		mapboxgl.accessToken =
-			'pk.eyJ1IjoicGhpbGJhdHQiLCJhIjoiY20zZnRnZnJiMDduNDJrcjVqbmh1YngxYyJ9.slSu4sW5K_TlU8yPdCbWKA'; // My mapbox access token
+		const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN; // My mapbox access token
+
+		if (!accessToken) {
+			throw new Error(
+				'Mapbox access token is not defined in the environment variables'
+			);
+		}
+
+		mapboxgl.accessToken = accessToken;
 		if (mapContainer.current) {
 			// Check if mapContainer is not null
 			map.current = new mapboxgl.Map({
