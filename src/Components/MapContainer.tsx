@@ -9,29 +9,42 @@ import axios from 'axios';
 export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const map = useRef<mapboxgl.Map | null>(null);
-	const [cats, setCats] = useState<Cat[]>([]);
+	const [catsMapInfo, setCatsMapInfo] = useState<Cat[]>([]);
 	const home: Coordinates = [-1.45054, 53.80619];
+	const [userId, setUserId] = useState<string>('cm3op7iwu0000jrcqa60tc9kv'); // Test user id for now as no global user variable
 
 	useEffect(() => {
-		axios
-			.get('/api/users/cm3op7iwu0000jrcqa60tc9kv/devices')
-			.then((response: any) => {
-				// Needs better type
-				const updatedCats = response.data.data.map((device: any) => {
-					// Needs better type
-					// Black image for now as no there's images column
-					return {
-						name: device.name,
-						image:
-							'https://png.pngtree.com/png-clipart/20201029/ourmid/pngtree-circle-clipart-black-circle-png-image_2381996.jpg',
-						history: device.location_history,
-					};
-				});
-				setCats(updatedCats);
-			});
+		Promise.all([
+			axios.get(`http://localhost:9090/api/users/${userId}/devices`),
+			axios.get(`http://localhost:9090/api/users/${userId}/cats`),
+		]).then(([devices, cats]: [any, any]) => {
+			// Needs better types
+
+			const catsHistory: Coordinates[][] = devices.data.data.map(
+				(device: any) => device.location_history
+			);
+
+			const catsNameAndImage: { name: string; image: string }[] =
+				cats.data.data.map((cat: any) => ({
+					name: cat.name,
+					image: cat.image,
+				}));
+
+			const fullCatsMapInfo: Cat[] = catsHistory.map(
+				(history, index: number) => ({
+					name: catsNameAndImage[index].name,
+					image: catsNameAndImage[index].image,
+					history,
+				})
+			);
+			setCatsMapInfo(fullCatsMapInfo);
+		});
 	}, []);
 
-	useEffect(() => createMap(mapContainer, home, cats, map), [cats]);
+	useEffect(
+		() => createMap(mapContainer, home, catsMapInfo, map),
+		[catsMapInfo]
+	);
 
 	return <div style={{ width: '800px', height: '550px' }} ref={mapContainer} />;
 }

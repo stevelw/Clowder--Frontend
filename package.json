@@ -64,6 +64,5 @@
 	"lint-staged": {
 		"*.js, tsx": "npm run lint",
 		"*.{js,css,md,html,json,jsx,tsx,ts}": "npm run format"
-	},
-	"proxy": "http://localhost:8080"
+	}
 }
