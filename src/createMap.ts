@@ -9,17 +9,12 @@ export default function map(
 ) {
 	const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN; // My mapbox access token
 
-	if (!accessToken)
-		throw new Error(
-			'Mapbox access token is not defined in the environment variables'
-		);
+	if (!accessToken) throw new Error('Mapbox access token is not defined in the environment variables')
 
-	mapboxgl.accessToken = accessToken;
+	mapboxgl.accessToken = accessToken
 
-	if (mapContainer.current) {
-		// Check if mapContainer is not null
-		map.current = new mapboxgl.Map({
-			// Creates new map
+	if (mapContainer.current) { // Check if mapContainer is not null
+		map.current = new mapboxgl.Map({ // Creates new map
 			container: mapContainer.current, // Adds map to map container
 			center: home, // Sets map center to home location
 			zoom: 15,
@@ -31,16 +26,16 @@ export default function map(
 			const historyFormatted = cat.history.map((coord) => [coord[1], coord[0]]);
 
 			if (historyFormatted.length > 0) {
-				const markerElement = document.createElement('div'); // Creates cat icon
-				markerElement.style.width = '50px';
-				markerElement.style.height = '50px';
-				markerElement.style.backgroundImage = `url(${cat.image})`;
-				markerElement.style.backgroundSize = 'cover'; // Sets icon ontop of map properly
+				const markerElement = document.createElement('div') // Creates cat icon
+				markerElement.style.width = '50px'
+				markerElement.style.height = '50px'
+				markerElement.style.backgroundImage = `url(${cat.image})`
+				markerElement.style.backgroundSize = 'cover' // Sets icon ontop of map properly
 
-				console.log('Marker element styles:', markerElement.style);
+				console.log('Marker element styles:', markerElement.style)
 
 				const popup = new mapboxgl.Popup({ offset: 25 }) // Creates popup for marker
-					.setHTML(`<h3>${cat.name}</h3>`); // Popup with cat's name
+					.setHTML(`<h3>${cat.name}</h3>`) // Popup with cat's name
 
 				new mapboxgl.Marker({ element: markerElement }) // Adds cat icon
 					.setLngLat([
@@ -51,8 +46,7 @@ export default function map(
 					.addTo(map.current!) // Adds marker to map
 					.setPopup(popup); // Adds popup to marker
 
-				const catPathGeoJSON: GeoJSON.FeatureCollection = {
-					// GeoJSON object with the cat's path
+				const catPathGeoJSON: GeoJSON.FeatureCollection = { // GeoJSON object with the cat's path
 					type: 'FeatureCollection',
 					features: [
 						{
@@ -64,16 +58,15 @@ export default function map(
 							properties: {},
 						},
 					],
-				};
+				}
 
 				map.current!.on('load', () => {
 					if (map.current!.getLayer(`cat-path-${cat.name}`)) {
-						map.current!.removeLayer(`cat-path-${cat.name}`);
-						map.current!.removeSource(`cat-path-${cat.name}`);
+						map.current!.removeLayer(`cat-path-${cat.name}`)
+						map.current!.removeSource(`cat-path-${cat.name}`)
 					} // It tries to add layer again on re-render so need to delete it first
 
-					map.current!.addLayer({
-						// Adds line of where cat has been based off GeoJSON data
+					map.current!.addLayer({ // Adds line of where cat has been based off GeoJSON data
 						id: `cat-path-${cat.name}`,
 						type: 'line', // Specifies layer type
 						source: {
@@ -84,9 +77,9 @@ export default function map(
 							'line-color': '#FF0000',
 							'line-width': 3,
 						},
-					});
-				});
+					})
+				})
 			}
-		});
+		})
 	}
 }
