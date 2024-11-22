@@ -3,8 +3,10 @@ import './App.css';
 import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
 import CatProfile from './Components/CatProfile';
+import Nav from './Components/Nav';
 
 function App() {
+	const [page, setPage] = useState<String>('map');
 	const [cats, setCats] = useState<Cat[]>([
 		{
 			name: 'Whiskers',
@@ -36,6 +38,13 @@ function App() {
 		<>
 			<Map cats={cats} />
 			<CatProfile />
+
+			<Nav setPage={setPage} />
+			{page === 'map' && <Map cats={cats} />}
+			{page === 'myClowed' && <p>My Clowed</p>}
+			{page === 'leaderboard' && <p>Leaderboard</p>}
+			{page === 'chat' && <p>Chat</p>}
+			{page === 'settings' && <p>Settings</p>}
 		</>
 	);
 }
