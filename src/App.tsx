@@ -3,6 +3,7 @@ import './App.css';
 import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
 import Nav from './Components/Nav';
+import Settings from './Components/Settings';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
@@ -40,7 +41,7 @@ function App() {
 			{page === 'myClowed' && <p>My Clowed</p>}
 			{page === 'leaderboard' && <p>Leaderboard</p>}
 			{page === 'chat' && <p>Chat</p>}
-			{page === 'settings' && <p>Settings</p>}
+			{page === 'settings' && <Settings />}
 		</>
 	);
 }
