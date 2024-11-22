@@ -5,6 +5,8 @@ import Cat from '../Interfaces/Cat';
 import Coordinates from '../Types/Coordinates';
 import createMap from '../createMap';
 import axios from 'axios';
+import Device from '../Interfaces/Device';
+import CatFromAxios from '../Interfaces/CatFromAxios';
 
 export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -17,17 +19,15 @@ export default function MapContainer() {
 		Promise.all([
 			axios.get(`http://localhost:9090/api/users/${userId}/devices`),
 			axios.get(`http://localhost:9090/api/users/${userId}/cats`),
-		]).then(([devices, cats]: [any, any]) => {
-			// Needs better types
-
+		]).then(([devices, cats]) => {
 			const catsHistory: Coordinates[][] = devices.data.data.map(
-				(device: any) => device.location_history
+				(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
 			);
 
 			const catsNameAndImage: { name: string; image: string }[] =
-				cats.data.data.map((cat: any) => ({
+				cats.data.data.map((cat: CatFromAxios) => ({
 					name: cat.name,
-					image: cat.image,
+					image: cat.picture_url,
 				}));
 
 			const fullCatsMapInfo: Cat[] = catsHistory.map(
