@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
+import CatProfile from './Components/CatProfile';
 
 function App() {
 	const [cats, setCats] = useState<Cat[]>([
@@ -34,6 +35,7 @@ function App() {
 	return (
 		<>
 			<Map cats={cats} />
+			<CatProfile />
 		</>
 	);
 }
