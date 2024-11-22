@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Styling/Card';
+import { updateUser } from '../network';
 
 export default function Settings() {
 	const [visibilityUserSetting, setVisibilityUserSetting] =
 		useState<string>('Public');
+
+	useEffect(() => {
+		updateUser({ requested_privacy: visibilityUserSetting });
+	}, [visibilityUserSetting]);
 
 	return (
 		<>
