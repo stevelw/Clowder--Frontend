@@ -5,7 +5,7 @@ export default interface Device {
 	owner_id: string;
 	last_pulse_at: string | null;
 	last_location: object;
-	location_history: [number, number][];
+	location_history: { lat: number; lon: number }[];
 	updated_at: string;
 	created_at: string;
 }

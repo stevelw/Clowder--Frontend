@@ -20,10 +20,10 @@ export default function MapContainer() {
 			axios.get(`http://localhost:9090/api/users/${userId}/devices`),
 			axios.get(`http://localhost:9090/api/users/${userId}/cats`),
 		]).then(([devices, cats]) => {
-			const catsHistory: Coordinates[][] = devices.data.data.map(
-				(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
-			);
-
+			const catsHistory: { lat: number; lon: number }[][] =
+				devices.data.data.map(
+					(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
+				);
 			const catsNameAndImage: { name: string; image: string }[] =
 				cats.data.data.map((cat: CatFromAxios) => ({
 					name: cat.name,
