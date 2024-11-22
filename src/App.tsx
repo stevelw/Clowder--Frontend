@@ -36,12 +36,9 @@ function App() {
 
 	return (
 		<>
-			<Map cats={cats} />
-			<CatProfile />
-
 			<Nav setPage={setPage} />
 			{page === 'map' && <Map cats={cats} />}
-			{page === 'myClowed' && <p>My Clowed</p>}
+			{page === 'myClowed' && <CatProfile />}
 			{page === 'leaderboard' && <p>Leaderboard</p>}
 			{page === 'chat' && <p>Chat</p>}
 			{page === 'settings' && <p>Settings</p>}
