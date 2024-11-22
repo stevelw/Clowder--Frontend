@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
+import { Privacy } from './Types/Privacy';
 
 const network = axios.create({
 	baseURL: process.env.BACKEND_HOST,
 });
 
 export function updateUser(data: {
-	requested_privacy?: string;
+	requested_privacy?: Privacy;
 }): Promise<Object> {
 	return network
 		.patch('/api/users/settings', data)
