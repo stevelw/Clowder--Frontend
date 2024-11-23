@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Privacy } from './Types/Privacy';
 
 const network = axios.create({
-	baseURL: process.env.BACKEND_HOST,
+	baseURL: process.env.REACT_APP_BACKEND_HOST,
 });
 
 export function updateUser(data: {
