@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Styling/Card';
 import { updateUser } from '../network';
-import { Privacy } from '../Types/Privacy';
+import { type User, Privacy } from '../Types/User';
 
 export default function Settings() {
 	const [visibilityUserSetting, setVisibilityUserSetting] = useState<Privacy>(

@@ -3,3 +3,7 @@ export enum Privacy {
 	FRIENDS = 'FRIENDS',
 	PRIVATE = 'PRIVATE',
 }
+
+export interface User {
+	requested_privacy: Privacy;
+}
