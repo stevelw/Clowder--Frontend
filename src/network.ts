@@ -3,6 +3,9 @@ import { Privacy } from './Types/Privacy';
 
 const network = axios.create({
 	baseURL: process.env.REACT_APP_BACKEND_HOST,
+	headers: {
+		authorization: process.env.REACT_APP_LOGGED_IN_USER,
+	},
 });
 
 export function updateUser(data: {
