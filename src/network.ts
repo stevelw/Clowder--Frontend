@@ -8,6 +8,18 @@ const network = axios.create({
 	},
 });
 
+export function getUser(): Promise<User> {
+	return network
+		.get('/api/users/settings')
+		.then((res: AxiosResponse) => {
+			return res.data.data;
+		})
+		.catch((err: Error) => {
+			console.log(`Network error: ${err.message}`);
+			return {};
+		});
+}
+
 export function updateUser(data: User): Promise<User> {
 	return network
 		.patch('/api/users/settings', data)
