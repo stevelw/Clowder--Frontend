@@ -17,7 +17,6 @@ function CatProfile() {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
 
-				console.log(fetchedProfiles);
 				setCatsProfile(fetchedProfiles);
 				setIsLoading(false);
 				setChangeName(profile.name);
@@ -44,9 +43,7 @@ function CatProfile() {
 		}
 	};
 
-	const handleSavedChanges = () => {
-		console.log({ changeName, changePictureurl, changeDescription });
-	};
+	const handleSavedChanges = () => {};
 
 	return (
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
