@@ -4,9 +4,9 @@ import MapContainer from './Components/MapContainer';
 
 function App() {
 	return (
-		<>
+		<div className="h-screen">
 			<MapContainer />
-		</>
+		</div>
 	);
 }
 

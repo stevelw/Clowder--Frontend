@@ -45,7 +45,7 @@ export default function map(
 				console.log('Marker element styles:', markerElement.style);
 
 				const popup = new mapboxgl.Popup({ offset: 25 }) // Creates popup for marker
-					.setHTML(`<h3>${cat.name}</h3>`); // Popup with cat's name
+					.setHTML(`<header>${cat.name}</header>`); // Popup with cat's name
 
 				new mapboxgl.Marker({ element: markerElement }) // Adds cat icon
 					.setLngLat([
