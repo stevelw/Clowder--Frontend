@@ -29,8 +29,8 @@ export default function annotateMap(
 	if (map.current) {
 		cats.forEach((cat) => {
 			const historyFormatted = cat.history.map((coord) => [
-				coord.lon,
 				coord.lat,
+				coord.lon,
 			]);
 
 			if (historyFormatted.length > 0) {
