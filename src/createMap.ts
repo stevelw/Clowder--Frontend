@@ -28,8 +28,6 @@ export default function annotateMap(
 
 	if (map.current) {
 		cats.forEach((cat) => {
-			console.log(cat.history);
-
 			const historyFormatted = cat.history.map((coord) => [
 				coord.lon,
 				coord.lat,
@@ -41,8 +39,6 @@ export default function annotateMap(
 				markerElement.style.height = '50px';
 				markerElement.style.backgroundImage = `url(${cat.image})`;
 				markerElement.style.backgroundSize = 'cover'; // Sets icon ontop of map properly
-
-				console.log('Marker element styles:', markerElement.style);
 
 				const popup = new mapboxgl.Popup({ offset: 25 }) // Creates popup for marker
 					.setHTML(`<header>${cat.name}</header>`); // Popup with cat's name
