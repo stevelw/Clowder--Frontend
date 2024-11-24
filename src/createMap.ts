@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import Cat from './Interfaces/Cat';
 
-export default function map(
+export default function annotateMap(
 	mapContainer: React.RefObject<HTMLDivElement | null>,
 	home: [number, number],
 	cats: Cat[],
