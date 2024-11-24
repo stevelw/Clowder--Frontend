@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
-import CatProfile from './Components/CatProfile';
 import Nav from './Components/Nav';
+import MyClowder from './Components/MyClowder';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
@@ -38,7 +38,7 @@ function App() {
 		<>
 			<Nav setPage={setPage} />
 			{page === 'map' && <Map cats={cats} />}
-			{page === 'myClowed' && <CatProfile />}
+			{page === 'myClowed' && <MyClowder />}
 			{page === 'leaderboard' && <p>Leaderboard</p>}
 			{page === 'chat' && <p>Chat</p>}
 			{page === 'settings' && <p>Settings</p>}
