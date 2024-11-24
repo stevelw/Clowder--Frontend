@@ -4,7 +4,6 @@ export default interface Device {
 	uuid: string;
 	owner_id: string;
 	last_pulse_at: string | null;
-	last_location: object;
 	location_history: { lat: number; lon: number }[];
 	updated_at: string;
 	created_at: string;

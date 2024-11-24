@@ -6,7 +6,7 @@ export default function annotateMap(
 	home: [number, number],
 	cats: Cat[],
 	map: React.MutableRefObject<mapboxgl.Map | null>
-) {
+): void {
 	const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN; // My mapbox access token
 
 	if (!accessToken)
