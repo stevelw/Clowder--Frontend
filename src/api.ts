@@ -1,4 +1,14 @@
 import axios from 'axios';
+import CatProfile from './Components/CatProfile';
+
+const network = axios.create({
+	baseURL: process.env.REACT_APP_BACKEND_HOST,
+	headers: {
+		authorization: process.env.REACT_APP_LOGGED_IN_USER,
+	},
+});
+
+const loggedInUser = 'cm3op7iwu0000jrcqa60tc9kv'; // For demonstration purposes
 
 interface Cat {
 	id: string;
@@ -13,43 +23,15 @@ interface Cat {
 }
 
 const getCatsProfiles = (): Promise<void | Cat[]> => {
-	return Promise.resolve([
-		{
-			id: '01',
-			name: 'Snow',
-			description: 'a playful cat',
-			pictureurl: '123',
-			device_id: '234',
-			owner_id: 'id_50',
-			updated_at: '2024-09-10T10:00:00Z',
-			created_at: '2024-01-01T10:00:00Z',
-			deleted_at: null,
-		},
-		{
-			id: '02',
-			name: 'happy',
-			description: 'a cutie cat',
-			pictureurl: '321',
-			device_id: '876',
-			owner_id: 'id_51',
-			updated_at: '2023-02-10T12:00:00Z',
-			created_at: '2023-04-09T15:00:00Z',
-			deleted_at: null,
-		},
-	]);
+	return network
+		.get(`/api/users/${loggedInUser}/cats`)
+		.then(({ data: { data: catProfiles } }) => {
+			return catProfiles;
+		})
+		.catch((error) => {
+			console.log(error);
+			return [];
+		});
 };
-
-// const getCatsProfiles = (): Promise<void | CatProfile[]> => {
-// 	return axios
-// 		.get<CatProfile[]>(
-// 			'http://localhost:9090/api/users/cm3op7iwu0000jrcqa60tc9kv/cats'
-// 		)
-// 		.then((response) => {
-// 			return response.data;
-// 		})
-// 		.catch((error) => {
-// 			console.log("That's an error:", error);
-// 		});
-// };
 
 export { getCatsProfiles, type Cat };
