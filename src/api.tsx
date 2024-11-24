@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-interface CatProfile {
+interface Cat {
 	id: string;
 	name: string;
 	description: string;
@@ -12,7 +12,7 @@ interface CatProfile {
 	deleted_at: null;
 }
 
-const getCatsProfiles = (): Promise<void | CatProfile[]> => {
+const getCatsProfiles = (): Promise<void | Cat[]> => {
 	return Promise.resolve([
 		{
 			id: '01',
@@ -52,4 +52,4 @@ const getCatsProfiles = (): Promise<void | CatProfile[]> => {
 // 		});
 // };
 
-export { getCatsProfiles as getCatsProfiles };
+export { getCatsProfiles, type Cat };

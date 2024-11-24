@@ -4,12 +4,13 @@ import { getCatsProfiles } from '../api';
 import FormInput from './Styling/FormInput';
 import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
+import { Cat } from '../api';
 
 function CatProfile() {
 	const [changeName, setChangeName] = useState<string>('');
 	const [changePictureurl, setChangePictureurl] = useState<string>('');
 	const [changeDescription, setChangeDescription] = useState<string>('');
-	const [catsProfile, setCatsProfile] = useState<any>(''); //it will be an interface
+	const [catsProfile, setCatsProfile] = useState<Cat[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
