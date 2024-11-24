@@ -11,7 +11,7 @@ export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const map = useRef<mapboxgl.Map | null>(null);
 	const [catsMapInfo, setCatsMapInfo] = useState<Cat[]>([]);
-	const home: Coordinates = [-1.45054, 53.80619];
+	const home: Coordinates = [53.80619, -1.45054];
 	const [userId, setUserId] = useState<string>('cm3op7iwu0000jrcqa60tc9kv'); // Test user id for now as no global user variable
 
 	useEffect(() => {
