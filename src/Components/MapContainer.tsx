@@ -18,35 +18,38 @@ export default function MapContainer() {
 		Promise.all([
 			axios.get(`http://localhost:9090/api/users/${userId}/devices`),
 			axios.get(`http://localhost:9090/api/users/${userId}/cats`),
-		]).then(
-			([
-				{
-					data: { data: deviceData },
-				},
-				{
-					data: { data: catData },
-				},
-			]) => {
-				const catsHistory: { lat: number; lon: number }[][] = deviceData.map(
-					(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
-				);
-				const catsNameAndImage: { name: string; image: string }[] = catData.map(
-					(cat: CatFromAxios) => ({
-						name: cat.name,
-						image: cat.picture_url,
-					})
-				);
+		])
+			.then(
+				([
+					{
+						data: { data: deviceData },
+					},
+					{
+						data: { data: catData },
+					},
+				]) => {
+					const catsHistory: { lat: number; lon: number }[][] = deviceData.map(
+						(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
+					);
+					const catsNameAndImage: { name: string; image: string }[] =
+						catData.map((cat: CatFromAxios) => ({
+							name: cat.name,
+							image: cat.picture_url,
+						}));
 
-				const fullCatsMapInfo: Cat[] = catsHistory.map(
-					(history, index: number) => ({
-						name: catsNameAndImage[index].name,
-						image: catsNameAndImage[index].image,
-						history,
-					})
-				);
-				setCatsMapInfo(fullCatsMapInfo);
-			}
-		);
+					const fullCatsMapInfo: Cat[] = catsHistory.map(
+						(history, index: number) => ({
+							name: catsNameAndImage[index].name,
+							image: catsNameAndImage[index].image,
+							history,
+						})
+					);
+					setCatsMapInfo(fullCatsMapInfo);
+				}
+			)
+			.catch((err) => {
+				console.log(err);
+			});
 	}, []);
 
 	useEffect(
