@@ -7,10 +7,10 @@ import Button from './Styling/Button';
 import { Cat } from '../api';
 
 function CatProfile() {
-	const [changeName, setChangeName] = useState<string>('');
-	const [changePictureurl, setChangePictureurl] = useState<string>('');
-	const [changeDescription, setChangeDescription] = useState<string>('');
-	const [catsProfile, setCatsProfile] = useState<Cat[]>([]);
+	const [catName, setCatName] = useState<string>('');
+	const [catPicture, setCatPicture] = useState<string>('');
+	const [catDescription, setCatDescription] = useState<string>('');
+	const [catProfiles, setCatProfiles] = useState<Cat[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -18,11 +18,11 @@ function CatProfile() {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
 
-				setCatsProfile(fetchedProfiles);
+				setCatProfiles(fetchedProfiles);
 				setIsLoading(false);
-				setChangeName(profile.name);
-				setChangePictureurl(profile.pictureurl);
-				setChangeDescription(profile.description);
+				setCatName(profile.name);
+				setCatPicture(profile.pictureurl);
+				setCatDescription(profile.description);
 			}
 		});
 	}, []);
@@ -36,11 +36,11 @@ function CatProfile() {
 		const { name, value } = event.target;
 
 		if (name === 'name') {
-			setChangeName(value);
+			setCatName(value);
 		} else if (name === 'pictureurl') {
-			setChangePictureurl(value);
+			setCatPicture(value);
 		} else if (name === 'description') {
-			setChangeDescription(value);
+			setCatDescription(value);
 		}
 	};
 
@@ -57,7 +57,7 @@ function CatProfile() {
 					<FormInput
 						type="text"
 						name="name"
-						value={changeName}
+						value={catName}
 						onChange={handleProfileEditBy}
 					/>
 				</label>
@@ -68,7 +68,7 @@ function CatProfile() {
 					<FormInput
 						type="text"
 						name="pictureurl"
-						value={changePictureurl}
+						value={catPicture}
 						onChange={handleProfileEditBy}
 					/>
 				</label>
@@ -79,7 +79,7 @@ function CatProfile() {
 					<FormInput
 						type=""
 						name="description"
-						value={changeDescription}
+						value={catDescription}
 						onChange={handleProfileEditBy}
 					/>
 				</label>
