@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { getCatsProfiles } from '../api';
+import FormInput from './Styling/FormInput';
+import FormElement from './Styling/FormElement';
+import Button from './Styling/Button';
 
 function CatProfile() {
 	const [changeName, setChangeName] = useState<string>('');
@@ -46,41 +49,44 @@ function CatProfile() {
 	};
 
 	return (
-		<div className="profile-container">
-			<h2 className="profile-title">Cat's Profile</h2>
-			<div className="profile-field">
-				<label>Name</label>
-				<input
-					className="profile-input"
-					type="text"
-					name="name"
-					value={changeName}
-					onChange={handleProfileEditBy}
-				/>
-			</div>
-			<div className="profile-field">
-				<label>Pricture</label>
-				<input
-					className="profile-input"
-					type="text"
-					name="pictureurl"
-					value={changePictureurl}
-					onChange={handleProfileEditBy}
-				/>
-			</div>
-			<div className="profile-field">
-				<label>Description</label>
-				<input
-					className="profile-input"
-					type="text"
-					name="description"
-					value={changeDescription}
-					onChange={handleProfileEditBy}
-				/>
-			</div>
-			<button className="save-button" onClick={handleSavedChanges}>
-				Save
-			</button>
+		<div className="w-72 p-20 m-auto bg-emerald-100	">
+			<h2 className="text-2xl font-bold text-red-950	mb-20">
+				Cat&apos;s Profile
+			</h2>
+			<FormElement>
+				<label>
+					Name
+					<FormInput
+						type="text"
+						name="name"
+						value={changeName}
+						onChange={handleProfileEditBy}
+					/>
+				</label>
+			</FormElement>
+			<FormElement>
+				<label>
+					Pricture
+					<FormInput
+						type="text"
+						name="pictureurl"
+						value={changePictureurl}
+						onChange={handleProfileEditBy}
+					/>
+				</label>
+			</FormElement>
+			<FormElement>
+				<label>
+					Description
+					<FormInput
+						type=""
+						name="description"
+						value={changeDescription}
+						onChange={handleProfileEditBy}
+					/>
+				</label>
+			</FormElement>
+			<Button onClick={handleSavedChanges}>Save</Button>
 		</div>
 	);
 }
