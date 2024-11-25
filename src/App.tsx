@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import MapContainer from './Components/MapContainer';
 import Nav from './Components/Nav';
+import Settings from './Components/Settings';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
@@ -12,7 +13,7 @@ function App() {
 			{page === 'myClowed' && <p>My Clowed</p>}
 			{page === 'leaderboard' && <p>Leaderboard</p>}
 			{page === 'chat' && <p>Chat</p>}
-			{page === 'settings' && <p>Settings</p>}
+			{page === 'settings' && <Settings />}
 		</div>
 	);
 }
