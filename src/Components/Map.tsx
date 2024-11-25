@@ -85,5 +85,7 @@ export default function Map({ cats }: { cats: Cat[] }) {
 		}
 	}, [cats]);
 
-	return <div style={{ width: '800px', height: '550px' }} ref={mapContainer} />;
+	return (
+		<div className="fixed top-0 z-0 w-screen h-screen" ref={mapContainer} />
+	);
 }

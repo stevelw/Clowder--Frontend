@@ -14,7 +14,7 @@ interface Props {
 
 export default function Nav(props: Props) {
 	return (
-		<>
+		<div className="fixed mt-10 z-10 inset-x-64 flex justify-around bg-gray-200 p-2 shadow-lg rounded">
 			<FontAwesomeIcon
 				icon={faHouse}
 				onClick={() => {
@@ -45,6 +45,6 @@ export default function Nav(props: Props) {
 					props.setPage('settings');
 				}}
 			/>
-		</>
+		</div>
 	);
 }
