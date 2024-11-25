@@ -4,6 +4,7 @@ import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
 import Nav from './Components/Nav';
 import Settings from './Components/Settings';
+import MyClowder from './Components/MyClowder';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
@@ -38,7 +39,7 @@ function App() {
 		<>
 			<Nav setPage={setPage} />
 			{page === 'map' && <Map cats={cats} />}
-			{page === 'myClowed' && <p>My Clowed</p>}
+			{page === 'myClowed' && <MyClowder />}
 			{page === 'leaderboard' && <p>Leaderboard</p>}
 			{page === 'chat' && <p>Chat</p>}
 			{page === 'settings' && <Settings />}
