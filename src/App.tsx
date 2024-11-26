@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Map from './Components/Map';
 import Cat from './Interfaces/Cat';
 import Nav from './Components/Nav';
-import Coordinates from './Types/Coordinates';
-import Login from './Components/Login';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
-	const [username, setUsername] = useState<string | null>(
-		localStorage.getItem('username')
-	); // Set and created at login
-	const storedHome = localStorage.getItem('home');
-	const [home, setHome] = useState<Coordinates | null>(
-		JSON.parse(storedHome ? JSON.parse(storedHome) : null)
-	); // Set at login, used in map
 	const [cats, setCats] = useState<Cat[]>([
 		{
 			name: 'Whiskers',
@@ -45,17 +36,11 @@ function App() {
 	return (
 		<>
 			<Nav setPage={setPage} />
-			{!username ? (
-				<Login setUser={setUsername} setHome={setHome} />
-			) : (
-				<>
-					{page === 'map' && <Map cats={cats} />}
-					{page === 'myClowed' && <p>My Clowed</p>}
-					{page === 'leaderboard' && <p>Leaderboard</p>}
-					{page === 'chat' && <p>Chat</p>}
-					{page === 'settings' && <p>Settings</p>}
-				</>
-			)}
+			{page === 'map' && <Map cats={cats} />}
+			{page === 'myClowed' && <p>My Clowed</p>}
+			{page === 'leaderboard' && <p>Leaderboard</p>}
+			{page === 'chat' && <p>Chat</p>}
+			{page === 'settings' && <p>Settings</p>}
 		</>
 	);
 }
