@@ -14,7 +14,7 @@ interface Props {
 
 export default function Nav(props: Props) {
 	return (
-		<div className="flex justify-around bg-gray-200 p-2 shadow-lg rounded mx-10 flex-none">
+		<div className="flex justify-around bg-gray-200 p-2 shadow-lg rounded-full mx-10 flex-none">
 			<FontAwesomeIcon
 				icon={faHouse}
 				onClick={() => {

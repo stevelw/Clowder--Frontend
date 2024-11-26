@@ -19,7 +19,7 @@ export default function FormInput({
 		<label className="font-bold m-5">
 			{label}
 			<input
-				className="ml-3 shadow-inner bg-gray-200 p-2 rounded-lg"
+				className="ml-3 shadow-inner bg-gray-200 p-2 rounded-xl"
 				type={type}
 				name={name}
 				value={value}

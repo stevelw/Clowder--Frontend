@@ -7,7 +7,7 @@ interface Props {
 
 export default function PageWrapper({ children }: Props) {
 	return (
-		<div className="bg-gray-50 flex-auto rounded-t-3xl shadow-inner p-5">
+		<div className="bg-gray-50 flex-auto rounded-3xl shadow p-5">
 			{children}
 		</div>
 	);
