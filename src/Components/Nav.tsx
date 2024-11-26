@@ -28,18 +28,6 @@ export default function Nav(props: Props) {
 				}}
 			/>
 			<FontAwesomeIcon
-				icon={faTableList}
-				onClick={() => {
-					props.setPage('leaderboard');
-				}}
-			/>
-			<FontAwesomeIcon
-				icon={faComments}
-				onClick={() => {
-					props.setPage('chat');
-				}}
-			/>
-			<FontAwesomeIcon
 				icon={faGear}
 				onClick={() => {
 					props.setPage('settings');

@@ -16,8 +16,6 @@ function App() {
 				{page !== 'map' && (
 					<PageWrapper>
 						{page === 'myClowed' && <MyClowder />}
-						{page === 'leaderboard' && <p>Leaderboard</p>}
-						{page === 'chat' && <p>Chat</p>}
 						{page === 'settings' && <Settings />}
 					</PageWrapper>
 				)}
