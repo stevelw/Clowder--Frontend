@@ -5,6 +5,7 @@ import Nav from './Components/Nav';
 import Settings from './Components/Settings';
 import MyClowder from './Components/MyClowder';
 import OverlayWrapper from './Components/Styling/OverlayWrapper';
+import PageWrapper from './Components/Styling/PageWrapper';
 
 function App() {
 	const [page, setPage] = useState<String>('map');
@@ -12,12 +13,16 @@ function App() {
 		<div className="h-screen">
 			<OverlayWrapper>
 				<Nav setPage={setPage} />
-				{page === 'myClowed' && <MyClowder />}
-				{page === 'leaderboard' && <p>Leaderboard</p>}
-				{page === 'chat' && <p>Chat</p>}
-				{page === 'settings' && <Settings />}
+				{page !== 'map' && (
+					<PageWrapper>
+						{page === 'myClowed' && <MyClowder />}
+						{page === 'leaderboard' && <p>Leaderboard</p>}
+						{page === 'chat' && <p>Chat</p>}
+						{page === 'settings' && <Settings />}
+					</PageWrapper>
+				)}
 			</OverlayWrapper>
-			{page === 'map' && <MapContainer />}
+			<MapContainer />
 		</div>
 	);
 }
