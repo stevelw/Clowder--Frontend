@@ -17,6 +17,7 @@ function CatProfile() {
 		getCatsProfiles('USER1').then((fetchedProfiles) => {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
+				console.log(profile);
 
 				setCatProfiles(fetchedProfiles);
 				setIsLoading(false);
@@ -117,9 +118,8 @@ function CatProfile() {
 				</label>
 			</FormElement>
 			<Button onClick={handleSavedChanges}>Save</Button>
-			{catProfiles.length > 0 && (
-				<Button onClick={handleDeleteProfile}>Delete</Button>
-			)}
+
+			<Button onClick={handleDeleteProfile}>Delete</Button>
 		</div>
 	);
 }
