@@ -2,13 +2,12 @@ import React from 'react';
 import FormInput from './Styling/FormInput';
 import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
+import H3 from './Styling/H3';
 
 function CatProfile() {
 	return (
-		<div className="w-72 p-20 m-auto bg-emerald-100	">
-			<h3 className="text-2xl font-bold text-red-950	mb-20">
-				Cat&apos;s Profile
-			</h3>
+		<div className="">
+			<H3>Cat&apos;s Profile</H3>
 			<FormElement>
 				<label>
 					Name
