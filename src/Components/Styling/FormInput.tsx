@@ -1,4 +1,5 @@
 import React from 'react';
+import FormElement from './FormElement';
 
 interface Props {
 	type: React.HTMLInputTypeAttribute | undefined;
@@ -16,8 +17,7 @@ export default function FormInput({
 	onChange,
 }: Props) {
 	return (
-		<label className="font-bold m-5">
-			{label}
+		<FormElement label={label}>
 			<input
 				className="ml-3 shadow-inner bg-gray-200 p-2 rounded-xl"
 				type={type}
@@ -25,6 +25,6 @@ export default function FormInput({
 				value={value}
 				onChange={onChange}
 			/>
-		</label>
+		</FormElement>
 	);
 }
