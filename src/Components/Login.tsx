@@ -36,6 +36,10 @@ export default function Login({
 			return;
 		}
 
+		axios
+			.post('http://localhost:9090/api/users', username) // For when the endpoint gets setup
+			.catch((err) => alert(err));
+
 		localStorage.setItem('username', username);
 		localStorage.setItem('home', JSON.stringify([lat, lon]));
 
