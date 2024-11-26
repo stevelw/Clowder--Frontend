@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { getCatsProfiles } from '../api';
+import { getCatsProfiles, deleteCatProfile, updateCatProfile } from '../api';
 import FormInput from './Styling/FormInput';
 import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
@@ -14,7 +14,7 @@ function CatProfile() {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
-		getCatsProfiles().then((fetchedProfiles) => {
+		getCatsProfiles('USER1').then((fetchedProfiles) => {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
 
@@ -26,10 +26,6 @@ function CatProfile() {
 			}
 		});
 	}, []);
-
-	if (isLoading) {
-		return <p>Loading...</p>;
-	}
 
 	const handleProfileEditBy = (event: ChangeEvent<HTMLInputElement>) => {
 		//Handle editing process of Cat's profile, allow users to edit the profile
@@ -44,7 +40,43 @@ function CatProfile() {
 		}
 	};
 
-	const handleSavedChanges = () => {};
+	const handleSavedChanges = () => {
+		const updatedProfile = {
+			id: catProfiles[0]?.id,
+			name: catName,
+			pictureurl: catPicture,
+			description: catDescription,
+			device_id: catProfiles[0].device_id,
+			owner_id: catProfiles[0].owner_id,
+			updated_at: catProfiles[0].updated_at,
+			created_at: catProfiles[0].created_at,
+			deleted_at: null,
+		};
+		updateCatProfile(updatedProfile)
+			.then(() => {
+				setCatProfiles((previousProfiles) =>
+					previousProfiles?.map((profile) =>
+						profile.id === updatedProfile.id ? updatedProfile : profile
+					)
+				);
+			})
+			.catch(() => {
+				console.log('Updates havent been saved');
+			});
+	};
+
+	const handleDeleteProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
+		deleteCatProfile('USER1')
+			.then(() => {
+				console.log('Profile Removed');
+				setCatProfiles((fetchedProfiles) =>
+					fetchedProfiles.filter((profile) => profile.id !== profile.id)
+				);
+			})
+			.catch(() => {
+				console.log('Failed to delete the profile');
+			});
+	};
 
 	return (
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
@@ -77,7 +109,7 @@ function CatProfile() {
 				<label>
 					Description
 					<FormInput
-						type=""
+						type="text"
 						name="description"
 						value={catDescription}
 						onChange={handleProfileEditBy}
@@ -85,6 +117,9 @@ function CatProfile() {
 				</label>
 			</FormElement>
 			<Button onClick={handleSavedChanges}>Save</Button>
+			{catProfiles.length > 0 && (
+				<Button onClick={handleDeleteProfile}>Delete</Button>
+			)}
 		</div>
 	);
 }
