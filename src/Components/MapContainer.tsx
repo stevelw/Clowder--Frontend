@@ -57,5 +57,5 @@ export default function MapContainer() {
 		[catsMapInfo]
 	);
 
-	return <div className="w-full max-w-screen-lg h-4/5" ref={mapContainer} />;
+	return <div className="w-full max-w-screen-lg h-screen" ref={mapContainer} />;
 }
