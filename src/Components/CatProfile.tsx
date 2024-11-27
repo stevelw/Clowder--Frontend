@@ -6,7 +6,7 @@ import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
 import { Cat } from '../api';
 
-const loggedInUser = 'loggedInUser';
+const loggedInUser = 'USER1';
 
 function CatProfile() {
 	const [catName, setCatName] = useState<string>('');
@@ -17,7 +17,7 @@ function CatProfile() {
 	const [message, setMessage] = useState<string>('');
 
 	useEffect(() => {
-		getCatsProfiles('loggedInUser').then((fetchedProfiles) => {
+		getCatsProfiles('USER1').then((fetchedProfiles) => {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
 				setCatProfiles(fetchedProfiles);
@@ -73,7 +73,7 @@ function CatProfile() {
 	};
 
 	const handleDeleteProfile = () => {
-		deleteCatProfile('loggedInUser')
+		deleteCatProfile('USER1')
 			.then(() => {
 				setCatProfiles((fetchedProfiles) =>
 					fetchedProfiles.filter((profile) => profile.id !== profile.id)
