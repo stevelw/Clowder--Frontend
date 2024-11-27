@@ -8,9 +8,7 @@ const network = axios.create({
 	},
 });
 
-const loggedInUser = 'cm3op7iwu0000jrcqa60tc9kv'; // For demonstration purposes
-
-interface Cat {
+export interface Cat {
 	id: string;
 	name: string;
 	description: string;
@@ -22,9 +20,9 @@ interface Cat {
 	deleted_at: null;
 }
 
-const getCatsProfiles = (): Promise<void | Cat[]> => {
+export const getCatsProfiles = (id: string): Promise<void | Cat[]> => {
 	return network
-		.get(`/api/users/${loggedInUser}/cats`)
+		.get(`/api/users/${id}/cats`)
 		.then(({ data: { data: catProfiles } }) => {
 			return catProfiles;
 		})
@@ -34,4 +32,27 @@ const getCatsProfiles = (): Promise<void | Cat[]> => {
 		});
 };
 
-export { getCatsProfiles, type Cat };
+export const deleteCatProfile = (id: string): Promise<void | Cat[]> => {
+	return network
+		.delete(`/api/users/${id}/cats`)
+		.then(() => {
+			console.log('Cats profile has been deleted');
+		})
+		.catch((error) => {
+			console.log('Cats profile hasnt been deleted');
+		});
+};
+
+export const updateCatProfile = (
+	updatedProfile: Cat
+): Promise<void | Cat[]> => {
+	return network
+		.post(`/api/cats/update`, updatedProfile)
+		.then(({ data: { data: updatedProfile } }) => {
+			return updatedProfile;
+		})
+		.catch((error) => {
+			console.log(error);
+			return [];
+		});
+};
