@@ -17,7 +17,7 @@ function CatProfile() {
 	const [message, setMessage] = useState<string>('');
 
 	useEffect(() => {
-		getCatsProfiles('USER1').then((fetchedProfiles) => {
+		getCatsProfiles(loggedInUser).then((fetchedProfiles) => {
 			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
 				const profile = fetchedProfiles[0];
 				setCatProfiles(fetchedProfiles);
@@ -73,7 +73,7 @@ function CatProfile() {
 	};
 
 	const handleDeleteProfile = () => {
-		deleteCatProfile('USER1')
+		deleteCatProfile(loggedInUser)
 			.then(() => {
 				setCatProfiles((fetchedProfiles) =>
 					fetchedProfiles.filter((profile) => profile.id !== profile.id)
