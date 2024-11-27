@@ -1,11 +1,16 @@
 import React, { SetStateAction } from 'react';
 import CatProfile from './CatProfile';
+import H2 from './Styling/H2';
+import ModalPopover from './Styling/ModalPopover';
+
 
 export default function MyClowder() {
 	return (
 		<>
-			<h2>My Clowder</h2>
-			<CatProfile></CatProfile>
+			<H2>My Clowder</H2>
+			<ModalPopover>
+				<CatProfile></CatProfile>
+			</ModalPopover>
 		</>
 	);
 }

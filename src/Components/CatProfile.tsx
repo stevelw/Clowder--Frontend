@@ -86,8 +86,8 @@ function CatProfile() {
 				setMessage('Failed to delete the profile');
 			});
 	};
-
-	return (
+  
+  return (
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
 			<h2 className="text-2xl font-bold text-red-950	mb-20">
 				Cat&apos;s Profile
@@ -103,43 +103,36 @@ function CatProfile() {
 					{message}
 				</div>
 			)}
-			<FormElement>
-				<label>
-					Name
-					<FormInput
-						type="text"
-						name="name"
-						value={catName}
-						onChange={handleProfileEditBy}
-					/>
-				</label>
-			</FormElement>
-			<FormElement>
-				<label>
-					Pricture
-					<FormInput
-						type="text"
-						name="pictureurl"
-						value={catPicture}
-						onChange={handleProfileEditBy}
-					/>
-				</label>
-			</FormElement>
-			<FormElement>
-				<label>
-					Description
-					<FormInput
-						type="text"
-						name="description"
-						value={catDescription}
-						onChange={handleProfileEditBy}
-					/>
-				</label>
-			</FormElement>
-			<Button onClick={handleSavedChanges}>Save</Button>
-			<Button onClick={handleDeleteProfile}>Delete</Button>
+			<div className="flex flex-col">
+				<FormInput
+					label="Name"
+					type="text"
+					name="name"
+					value={catName}
+					onChange={handleProfileEditBy}
+				/>
+				<FormInput
+					label="Picture"
+					type="text"
+					name="pictureurl"
+					value={catPicture}
+					onChange={handleProfileEditBy}
+				/>
+				<FormInput
+					label="Description"
+					type="text"
+					name="description"
+					value={catDescription}
+					onChange={handleProfileEditBy}
+				/>
+				<Button onClick={handleSavedChanges}>Save</Button>
+				<Button onClick={handleDeleteProfile}>Delete</Button>
+			</div>
 		</div>
 	);
 }
 
 export default CatProfile;
+
+
+	

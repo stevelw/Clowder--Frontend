@@ -1,9 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 interface Props {
-	children: ReactNode;
+	label: string;
+	children?: React.ReactNode;
 }
 
-export default function FormElement({ children }: Props) {
-	return <div className="block text-sm mb-5 text-red-950">{children}</div>;
+export default function FormElement({ label, children }: Props) {
+	return (
+		<label className="font-bold m-5">
+			{label}
+			{children}
+		</label>
+	);
 }
