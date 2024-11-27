@@ -7,6 +7,17 @@ import MyClowder from './Components/MyClowder';
 import OverlayWrapper from './Components/Styling/OverlayWrapper';
 import PageWrapper from './Components/Styling/PageWrapper';
 
+const {
+	REACT_APP_MAPBOX_ACCESS_TOKEN,
+	REACT_APP_BACKEND_HOST,
+	REACT_APP_LOGGED_IN_USER,
+} = process.env;
+if (
+	!REACT_APP_BACKEND_HOST ||
+	!REACT_APP_MAPBOX_ACCESS_TOKEN ||
+	!REACT_APP_LOGGED_IN_USER
+)
+	throw new Error(`.env is not set up correctly. please read the README.`);
 
 function App() {
 	const [page, setPage] = useState<string>('map');
@@ -23,7 +34,6 @@ function App() {
 			</OverlayWrapper>
 			<MapContainer />
 		</div>
-
 	);
 }
 

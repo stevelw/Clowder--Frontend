@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { getCatsProfiles, deleteCatProfile, updateCatProfile } from '../api';
 import FormInput from './Styling/FormInput';
-import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
 import { Cat } from '../api';
+import H3 from './Styling/H3';
 
 const { REACT_APP_LOGGED_IN_USER } = process.env;
 
@@ -57,7 +57,7 @@ function CatProfile() {
 			device_id: catProfiles[0].device_id,
 			owner_id: catProfiles[0].owner_id,
 			updated_at: new Date().toISOString(),
-			created_at: catProfiles[0].created_at,
+			created_at: new Date().toISOString(),
 			deleted_at: null,
 		};
 		updateCatProfile(updatedProfile)
@@ -86,12 +86,12 @@ function CatProfile() {
 				setMessage('Failed to delete the profile');
 			});
 	};
-  
-  return (
+
+	return (
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
-			<h2 className="text-2xl font-bold text-red-950	mb-20">
+			<H3 className="text-2xl font-bold text-red-950	mb-20">
 				Cat&apos;s Profile
-			</h2>
+			</H3>
 			{message && (
 				<div
 					className={`text-2xl font-bold  mb-20
@@ -125,14 +125,10 @@ function CatProfile() {
 					value={catDescription}
 					onChange={handleProfileEditBy}
 				/>
-				<Button onClick={handleSavedChanges}>Save</Button>
+				<Button onClick={handleSavedChanges}>Submit</Button>
 				<Button onClick={handleDeleteProfile}>Delete</Button>
 			</div>
 		</div>
 	);
 }
-
 export default CatProfile;
-
-
-	

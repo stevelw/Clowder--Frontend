@@ -3,7 +3,6 @@ import CatProfile from './CatProfile';
 import H2 from './Styling/H2';
 import ModalPopover from './Styling/ModalPopover';
 
-
 export default function MyClowder() {
 	return (
 		<>
