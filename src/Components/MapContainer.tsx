@@ -5,7 +5,7 @@ import Coordinates from '../Types/Coordinates';
 import createMap from '../createMap';
 import Device from '../Types/Device';
 import CatFromAxios from '../Types/CatFromAxios';
-import { getCatsForUser, getDevicesForUser } from '../network';
+import { getCatsForUser, getCatsNear, getDevicesForUser } from '../network';
 
 export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -17,18 +17,38 @@ export default function MapContainer() {
 	useEffect(() => {
 		Promise.all([getDevicesForUser(userId), getCatsForUser(userId)])
 			.then(([devices, cats]: [Device[], CatFromAxios[]]) => {
-				setCatsMapInfo(
-					devices.map((device) => {
-						const theCat = cats.find((aCat) => (aCat.device_id = device.id));
-						if (!theCat) throw new Error('No cat found for that device');
+				const ownedCats: Cat[] = devices.map((device) => {
+					const catWearingDevice = cats.find(
+						(aCat) => (aCat.device_id = device.id)
+					);
+					if (!catWearingDevice)
+						throw new Error('No cat found for that device');
+					return {
+						id: catWearingDevice.id,
+						name: catWearingDevice.name,
+						image: catWearingDevice.picture_url,
+						history: device.location_history.slice(-205),
+						owned: true,
+					};
+				});
+				return Promise.all([
+					ownedCats,
+					...ownedCats.map(({ id }) => getCatsNear(id)),
+				]);
+			})
+			.then(([ownedCats, ...nearbyCats]) => {
+				const dedupedNearbyCats: Cat[] = Array.from(new Set(nearbyCats)).map(
+					({ id, name, picture_url }) => {
 						return {
-							id: theCat.id,
-							name: theCat.name,
-							image: theCat.picture_url,
-							history: device.location_history.slice(-205),
+							id,
+							name,
+							image: picture_url,
+							history: [], // TBP - See CL-125
+							owned: false,
 						};
-					})
+					}
 				);
+				setCatsMapInfo([...ownedCats, ...dedupedNearbyCats]);
 			})
 			.catch((err) => {
 				console.log(err);
