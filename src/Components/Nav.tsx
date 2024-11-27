@@ -6,25 +6,32 @@ interface Props {
 	setPage: React.Dispatch<SetStateAction<string>>;
 }
 
-export default function Nav(props: Props) {
+export default function Nav({ setPage }: Props) {
+	function buttonPressed(pageName: string) {
+		setPage((currentPage) => {
+			if (pageName === currentPage) return 'map';
+			return pageName;
+		});
+	}
+
 	return (
 		<div className="flex justify-around bg-gray-200 p-2 shadow-lg rounded-full mx-10 flex-none">
 			<FontAwesomeIcon
 				icon={faHouse}
 				onClick={() => {
-					props.setPage('map');
+					buttonPressed('map');
 				}}
 			/>
 			<FontAwesomeIcon
 				icon={faCat}
 				onClick={() => {
-					props.setPage('myClowed');
+					buttonPressed('myClowed');
 				}}
 			/>
 			<FontAwesomeIcon
 				icon={faGear}
 				onClick={() => {
-					props.setPage('settings');
+					buttonPressed('settings');
 				}}
 			/>
 		</div>
