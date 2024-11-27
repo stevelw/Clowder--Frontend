@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { User } from './Types/User';
-import CatFromAxios from './Interfaces/CatFromAxios';
+import Device from './Types/Device';
+import CatFromAxios from './Types/CatFromAxios';
 
 const network = axios.create({
 	baseURL: process.env.REACT_APP_BACKEND_HOST,
@@ -30,6 +31,30 @@ export function updateUser(data: User): Promise<User> {
 		.catch((err: Error) => {
 			console.log(`Network error: ${err.message}`);
 			return {};
+		});
+}
+
+export function getDevicesForUser(userId: string): Promise<Device[]> {
+	return network
+		.get(`/api/users/${userId}/devices`)
+		.then(({ data: { data: devices } }) => {
+			return devices;
+		})
+		.catch((err) => {
+			console.log(err);
+			return [];
+		});
+}
+
+export function getCatsForUser(userId: string): Promise<CatFromAxios[]> {
+	return network
+		.get(`/api/users/${userId}/cats`)
+		.then(({ data: { data: cats } }) => {
+			return cats;
+		})
+		.catch((err) => {
+			console.log(err);
+			return [];
 		});
 }
 
