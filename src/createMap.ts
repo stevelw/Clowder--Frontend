@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-import Cat from './Interfaces/Cat';
+import Cat from './Types/Cat';
 import Coordinates from './Types/Coordinates';
 
 export default function annotateMap(

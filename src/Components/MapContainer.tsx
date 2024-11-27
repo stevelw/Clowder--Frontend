@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Cat from '../Interfaces/Cat';
+import Cat from '../Types/Cat';
 import Coordinates from '../Types/Coordinates';
 import createMap from '../createMap';
 import axios from 'axios';
-import Device from '../Interfaces/Device';
-import CatFromAxios from '../Interfaces/CatFromAxios';
+import Device from '../Types/Device';
+import CatFromAxios from '../Types/CatFromAxios';
 
 export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
