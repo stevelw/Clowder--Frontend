@@ -3,11 +3,14 @@ import './App.css';
 import MapContainer from './Components/MapContainer';
 import Nav from './Components/Nav';
 import Settings from './Components/Settings';
+import MyClowder from './Components/MyClowder';
+import OverlayWrapper from './Components/Styling/OverlayWrapper';
+import PageWrapper from './Components/Styling/PageWrapper';
 import Login from './Components/Login';
 import { UserContext } from './Contexts/UserContext';
 
 function App() {
-	const [page, setPage] = useState<String>('map');
+	const [page, setPage] = useState<string>('map');
 	const { username } = useContext(UserContext);
 
 	return (
@@ -16,12 +19,16 @@ function App() {
 				<Login />
 			) : (
 				<>
-					<Nav setPage={setPage} />
-					{page === 'map' && <MapContainer />}
-					{page === 'myClowed' && <p>My Clowed</p>}
-					{page === 'leaderboard' && <p>Leaderboard</p>}
-					{page === 'chat' && <p>Chat</p>}
-					{page === 'settings' && <Settings />}
+					<OverlayWrapper>
+						<Nav setPage={setPage} />
+						{page !== 'map' && (
+							<PageWrapper>
+								{page === 'myClowed' && <MyClowder />}
+								{page === 'settings' && <Settings />}
+							</PageWrapper>
+						)}
+					</OverlayWrapper>
+					<MapContainer />
 				</>
 			)}
 		</div>
