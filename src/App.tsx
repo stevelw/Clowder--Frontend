@@ -8,7 +8,7 @@ import OverlayWrapper from './Components/Styling/OverlayWrapper';
 import PageWrapper from './Components/Styling/PageWrapper';
 
 function App() {
-	const [page, setPage] = useState<String>('map');
+	const [page, setPage] = useState<string>('map');
 	return (
 		<div className="h-screen">
 			<OverlayWrapper>

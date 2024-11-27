@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-	setPage: React.Dispatch<SetStateAction<String>>;
+	setPage: React.Dispatch<SetStateAction<string>>;
 }
 
 export default function Nav(props: Props) {
