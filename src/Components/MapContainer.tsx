@@ -3,9 +3,9 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Cat from '../Types/Cat';
 import Coordinates from '../Types/Coordinates';
 import createMap from '../createMap';
-import axios from 'axios';
 import Device from '../Types/Device';
 import CatFromAxios from '../Types/CatFromAxios';
+import { getCatsForUser, getDevicesForUser } from '../network';
 
 export default function MapContainer() {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -15,52 +15,29 @@ export default function MapContainer() {
 	const [userId, setUserId] = useState<string>('cm3op7iwu0000jrcqa60tc9kv'); // Test user id for now as no global user variable
 
 	useEffect(() => {
-		Promise.all([
-			axios.get(`http://localhost:9090/api/users/${userId}/devices`),
-			axios.get(`http://localhost:9090/api/users/${userId}/cats`),
-		])
-			.then(
-				([
-					{
-						data: { data: deviceData },
-					},
-					{
-						data: { data: catData },
-					},
-				]) => {
-					const catsHistory: { lat: number; lon: number }[][] = deviceData.map(
-						(device: Device) => device.location_history.slice(-205) // If it updates every 7 mins this should be the last 24 hours
-					);
-					const catsNameAndImage: {
-						id: string;
-						name: string;
-						image: string;
-					}[] = catData.map((cat: CatFromAxios) => ({
-						id: cat.id,
-						name: cat.name,
-						image: cat.picture_url,
-					}));
-
-					const fullCatsMapInfo: Cat[] = catsHistory.map(
-						(history, index: number) => ({
-							id: catsNameAndImage[index].id,
-							name: catsNameAndImage[index].name,
-							image: catsNameAndImage[index].image,
-							history,
-						})
-					);
-					setCatsMapInfo(fullCatsMapInfo);
-				}
-			)
+		Promise.all([getDevicesForUser(userId), getCatsForUser(userId)])
+			.then(([devices, cats]: [Device[], CatFromAxios[]]) => {
+				setCatsMapInfo(
+					devices.map((device) => {
+						const theCat = cats.find((aCat) => (aCat.device_id = device.id));
+						if (!theCat) throw new Error('No cat found for that device');
+						return {
+							id: theCat.id,
+							name: theCat.name,
+							image: theCat.picture_url,
+							history: device.location_history.slice(-205),
+						};
+					})
+				);
+			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}, []);
 
-	useEffect(
-		() => createMap(mapContainer, home, catsMapInfo, map),
-		[catsMapInfo]
-	);
+	useEffect(() => {
+		createMap(mapContainer, home, catsMapInfo, map);
+	}, [catsMapInfo]);
 
 	return <div className="w-screen h-screen" ref={mapContainer} />;
 }
