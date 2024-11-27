@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './App.css';
 import MapContainer from './Components/MapContainer';
 import Nav from './Components/Nav';
@@ -6,6 +6,8 @@ import Settings from './Components/Settings';
 import MyClowder from './Components/MyClowder';
 import OverlayWrapper from './Components/Styling/OverlayWrapper';
 import PageWrapper from './Components/Styling/PageWrapper';
+import Login from './Components/Login';
+import { UserContext } from './Contexts/UserContext';
 
 const {
 	REACT_APP_MAPBOX_ACCESS_TOKEN,
@@ -21,18 +23,26 @@ if (
 
 function App() {
 	const [page, setPage] = useState<string>('map');
+	const { username } = useContext(UserContext);
+
 	return (
 		<div className="h-screen">
-			<OverlayWrapper>
-				<Nav setPage={setPage} />
-				{page !== 'map' && (
-					<PageWrapper>
-						{page === 'myClowed' && <MyClowder />}
-						{page === 'settings' && <Settings />}
-					</PageWrapper>
-				)}
-			</OverlayWrapper>
-			<MapContainer />
+			{!username ? (
+				<Login />
+			) : (
+				<>
+					<OverlayWrapper>
+						<Nav setPage={setPage} />
+						{page !== 'map' && (
+							<PageWrapper>
+								{page === 'myClowed' && <MyClowder />}
+								{page === 'settings' && <Settings />}
+							</PageWrapper>
+						)}
+					</OverlayWrapper>
+					<MapContainer />
+				</>
+			)}
 		</div>
 	);
 }
