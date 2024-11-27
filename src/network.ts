@@ -31,3 +31,19 @@ export function updateUser(data: User): Promise<User> {
 			return {};
 		});
 }
+
+export function registerUser(
+	username: string
+): Promise<null | { username: string }> {
+	return network
+		.post('/users', {
+			username,
+		})
+		.then((response) => {
+			return response.data;
+		})
+		.catch((err) => {
+			console.log(err);
+			return null;
+		});
+}
