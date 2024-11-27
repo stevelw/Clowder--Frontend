@@ -125,7 +125,9 @@ function CatProfile() {
 					value={catDescription}
 					onChange={handleProfileEditBy}
 				/>
-				<Button onClick={handleSavedChanges}>Submit</Button>
+				<Button type="submit" onClick={handleSavedChanges}>
+					Submit
+				</Button>
 				<Button onClick={handleDeleteProfile}>Delete</Button>
 			</div>
 		</div>
