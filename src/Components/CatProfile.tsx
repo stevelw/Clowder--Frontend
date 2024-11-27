@@ -6,7 +6,7 @@ import FormElement from './Styling/FormElement';
 import Button from './Styling/Button';
 import { Cat } from '../api';
 
-const loggedInUser = 'USER1';
+const { REACT_APP_LOGGED_IN_USER } = process.env;
 
 function CatProfile() {
 	const [catName, setCatName] = useState<string>('');
@@ -17,16 +17,18 @@ function CatProfile() {
 	const [message, setMessage] = useState<string>('');
 
 	useEffect(() => {
-		getCatsProfiles(loggedInUser).then((fetchedProfiles) => {
-			if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
-				const profile = fetchedProfiles[0];
-				setCatProfiles(fetchedProfiles);
-				setCatName(profile.name);
-				setCatPicture(profile.pictureurl);
-				setCatDescription(profile.description);
+		getCatsProfiles(REACT_APP_LOGGED_IN_USER as string).then(
+			(fetchedProfiles) => {
+				if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
+					const profile = fetchedProfiles[0];
+					setCatProfiles(fetchedProfiles);
+					setCatName(profile.name);
+					setCatPicture(profile.pictureurl);
+					setCatDescription(profile.description);
+				}
+				setIsLoading(false);
 			}
-			setIsLoading(false);
-		});
+		);
 	}, []);
 
 	if (isLoading) {
@@ -73,7 +75,7 @@ function CatProfile() {
 	};
 
 	const handleDeleteProfile = () => {
-		deleteCatProfile(loggedInUser)
+		deleteCatProfile(REACT_APP_LOGGED_IN_USER as string)
 			.then(() => {
 				setCatProfiles((fetchedProfiles) =>
 					fetchedProfiles.filter((profile) => profile.id !== profile.id)
