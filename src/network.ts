@@ -36,7 +36,7 @@ export function registerUser(
 	username: string
 ): Promise<null | { username: string }> {
 	return network
-		.post('/users', {
+		.post('/api/users', {
 			username,
 		})
 		.then((response) => {
