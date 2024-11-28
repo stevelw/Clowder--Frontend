@@ -6,7 +6,8 @@ interface Props {
 	label: string;
 	name: string | undefined;
 	value: string | number | readonly string[] | undefined;
-	onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+	onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+	placeholder?: string;
 }
 
 export default function FormInput({
@@ -19,7 +20,7 @@ export default function FormInput({
 	return (
 		<FormElement label={label}>
 			<input
-				className="ml-3 shadow-inner bg-gray-200 p-2 rounded-xl"
+				className="m-5 shadow-inner bg-gray-200 p-2 rounded-xl"
 				type={type}
 				name={name}
 				value={value}
