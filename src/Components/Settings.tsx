@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Card from './Styling/Card';
 import { getUser, updateUser } from '../network';
 import { type User, Privacy } from '../Types/User';
+import H2 from './Styling/H2';
+import FormSelect from './Styling/FormSelect';
 
 export default function Settings() {
 	const [visibilityUserSetting, setVisibilityUserSetting] =
@@ -58,19 +60,14 @@ export default function Settings() {
 
 	return (
 		<>
-			<h1>Settings</h1>
+			<H2>Settings</H2>
 			<Card heading="Privacy">
-				<label>
-					Visibility
-					<select
-						value={visibilityUserSetting}
-						onChange={({ target: { value } }) => handlePrivacyChange(value)}
-					>
-						<option>Public</option>
-						<option>Friends only</option>
-						<option>Hidden</option>
-					</select>
-				</label>
+				<FormSelect
+					label="Visibility"
+					value={visibilityUserSetting}
+					options={new Set(['Public', 'Friends only', 'Hidden'])}
+					onChange={({ target: { value } }) => handlePrivacyChange(value)}
+				></FormSelect>
 			</Card>
 		</>
 	);
