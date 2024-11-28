@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../Contexts/UserContext';
 import { registerUser } from '../network';
+import FormInput from './Styling/FormInput';
+import H2 from './Styling/H2';
+import Button from './Styling/Button';
 
 export default function Login() {
 	const { setUsername, setHome } = useContext(UserContext);
@@ -38,46 +41,42 @@ export default function Login() {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<label>
-				User
-				<input
-					type="text"
-					name="username"
-					placeholder="Username"
-					value={formUsername}
-					onChange={({ target: { value } }) => setFormUsername(value)}
-				/>
-			</label>
-			<p>Home Location</p>
-			<label>
-				Lat.
-				<input
+			<FormInput
+				label="User"
+				type="text"
+				name="username"
+				placeholder="Username"
+				value={formUsername}
+				onChange={({ target: { value } }) => setFormUsername(value)}
+			/>
+			<section>
+				<H2>Home Location</H2>
+				<FormInput
+					label="Lat."
 					type="text"
 					name="latitude"
 					placeholder="Latitude"
 					value={latitude}
 					onChange={({ target: { value } }) => setLatitude(value)}
 				/>
-			</label>
-			<label>
-				Long.
-				<input
+				<FormInput
+					label="Long."
 					type="text"
 					name="longitude"
 					placeholder="Longitude"
 					value={longitude}
 					onChange={({ target: { value } }) => setLongitude(value)}
 				/>
-			</label>
+			</section>
 			{errorMessage && <p>{errorMessage}</p>}
-			<button
+			<Button
 				type="submit"
 				disabled={
 					!formUsername || !isValidLat(latitude) || !isValidLong(longitude)
 				}
 			>
 				Create User
-			</button>
+			</Button>
 		</form>
 	);
 }
