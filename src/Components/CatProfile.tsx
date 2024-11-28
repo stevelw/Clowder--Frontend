@@ -9,6 +9,7 @@ import FormInput from './Styling/FormInput';
 import Button from './Styling/Button';
 import H3 from './Styling/H3';
 import CatFromAxios from '../Interfaces/CatFromAxios';
+import Messages from './Styling/Messages';
 
 const { REACT_APP_LOGGED_IN_USER } = process.env;
 
@@ -40,7 +41,6 @@ function CatProfile() {
 	}
 
 	const handleProfileEditBy = (event: ChangeEvent<HTMLInputElement>) => {
-		//Handle editing process of Cat's profile, allow users to edit the profile
 		const { name, value } = event.target;
 
 		if (name === 'name') {
@@ -95,15 +95,20 @@ function CatProfile() {
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
 			<H3>Cat&apos;s Profile</H3>
 			{message && (
-				<div
-					className={`text-2xl font-bold  mb-20
-					${message === 'Updates have been saved' ? 'text-red-950' : ''}
-					${message === 'Updates havent been saved' ? 'text-red-950' : ''}
-					${message === 'Profile Removed' ? 'text-red-950' : ''}
-					${message === 'Failed to delete the profile' ? 'text-red-950' : ''}`}
-				>
-					{message}
-				</div>
+				<>
+					{message === 'Updates have been saved' && (
+						<Messages text="Updates have been saved" status="success" />
+					)}
+					{message === "Updates haven't been saved" && (
+						<Messages text="Updates haven't been saved" status="error" />
+					)}
+					{message === 'Profile Removed' && (
+						<Messages text="Profile Removed" status="success" />
+					)}
+					{message === 'Failed to delete the profile' && (
+						<Messages text="Failed to delete the profile" status="error" />
+					)}
+				</>
 			)}
 			<div className="flex flex-col">
 				<FormInput
