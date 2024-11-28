@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../Contexts/UserContext';
-import { registerUser } from '../network';
+// import { registerUser } from '../network';
 import FormInput from './Styling/FormInput';
 import H2 from './Styling/H2';
 import Button from './Styling/Button';
@@ -25,18 +25,21 @@ export default function Login() {
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
-		return registerUser(formUsername).then(
-			(newUser: null | { username: string }) => {
-				if (!newUser) {
-					setErrorMessage(
-						'Sorry, there was an error creating an account. Please try again later.'
-					);
-				} else {
-					setUsername(newUser.username);
-					setHome([parseFloat(latitude), parseFloat(longitude)]);
-				}
-			}
-		);
+		// For demo
+
+		setUsername('user1');
+		// return registerUser(formUsername).then(
+		// 	(newUser: null | { username: string }) => {
+		// 		if (!newUser) {
+		// 			setErrorMessage(
+		// 				'Sorry, there was an error creating an account. Please try again later.'
+		// 			);
+		// 		} else {
+		// 			setUsername(newUser.username);
+		// 			setHome([parseFloat(latitude), parseFloat(longitude)]);
+		// 		}
+		// 	}
+		// );
 	}
 
 	return (
