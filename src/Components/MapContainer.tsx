@@ -37,17 +37,17 @@ export default function MapContainer() {
 				]);
 			})
 			.then(([ownedCats, ...nearbyCats]) => {
-				const dedupedNearbyCats: Cat[] = Array.from(new Set(nearbyCats)).map(
-					({ id, name, picture_url }) => {
-						return {
-							id,
-							name,
-							image: picture_url,
-							history: [], // TBP - See CL-125
-							owned: false,
-						};
-					}
-				);
+				const dedupedNearbyCats: Cat[] = Array.from(
+					new Set(nearbyCats.flat())
+				).map(({ id, name, picture_url }) => {
+					return {
+						id,
+						name,
+						image: picture_url,
+						history: [], // TBP - See CL-125
+						owned: false,
+					};
+				});
 				setCatsMapInfo([...ownedCats, ...dedupedNearbyCats]);
 			})
 			.catch((err) => {
