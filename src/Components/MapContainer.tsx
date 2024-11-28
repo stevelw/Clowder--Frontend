@@ -39,12 +39,12 @@ export default function MapContainer() {
 			.then(([ownedCats, ...nearbyCats]) => {
 				const dedupedNearbyCats: Cat[] = Array.from(
 					new Set(nearbyCats.flat())
-				).map(({ id, name, picture_url }) => {
+				).map(({ cat: { id, name, picture_url }, last_location }) => {
 					return {
 						id,
 						name,
 						image: picture_url,
-						history: [], // TBP - See CL-125
+						history: [last_location],
 						owned: false,
 					};
 				});
