@@ -29,7 +29,9 @@ function CatProfile() {
 					value="A good girl"
 					onChange={() => {}}
 				/>
-				<Button onClick={() => {}}>Save</Button>
+				<Button type="submit" onClick={() => {}}>
+					Save
+				</Button>
 			</div>
 		</div>
 	);
