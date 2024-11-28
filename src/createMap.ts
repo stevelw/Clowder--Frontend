@@ -29,15 +29,12 @@ export default function annotateMap(
 	}
 
 	if (map.current) {
+		console.log(cats, '<<< Cats for map');
 		cats.forEach((cat) => {
-			const historyFormatted: Coordinates[] = cat.history.map((coord) => [
-				coord.lat,
-				coord.lon,
-			]);
-
-			if (historyFormatted.length > 0) {
-				drawCat(cat, historyFormatted, map);
-			}
+			const historyFormatted: Coordinates[] = cat.owned
+				? cat.history.map((coord) => [coord.lat, coord.lon])
+				: [];
+			drawCat(cat, historyFormatted, map);
 		});
 	}
 }
@@ -48,7 +45,8 @@ function drawCat(
 ) {
 	drawCatPopup(cat, historyFormatted, map);
 
-	drawCatPath(historyFormatted, map, cat);
+	if (historyFormatted.length && cat.owned)
+		drawCatPath(historyFormatted, map, cat);
 }
 
 function drawCatPath(
@@ -98,15 +96,17 @@ function drawCatPopup(
 ) {
 	const catLocation: Coordinates | undefined = historyFormatted.at(-1);
 	if (catLocation) {
+		const imageDimensions = cat.owned ? '50px' : '100px';
 		const catIcon = document.createElement('div');
-		catIcon.style.width = '50px';
-		catIcon.style.height = '50px';
+		catIcon.style.width = imageDimensions;
+		catIcon.style.height = imageDimensions;
 		catIcon.style.backgroundImage = `url(${cat.image})`;
 		catIcon.style.backgroundSize = 'cover'; // Sets icon ontop of map properly
 
-		const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-			`<header>${cat.name}</header>`
-		);
+		const popupHtml = cat.owned
+			? `<header>${cat.name}</header>`
+			: `<header>Rival: ${cat.name}</header>`;
+		const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupHtml);
 
 		new mapboxgl.Marker({ element: catIcon })
 			.setLngLat({
