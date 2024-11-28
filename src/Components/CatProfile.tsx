@@ -1,18 +1,22 @@
 import React from 'react';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { getCatsProfiles, deleteCatProfile, updateCatProfile } from '../api';
+import {
+	getCatsProfiles,
+	deleteCatProfile,
+	updateCatProfile,
+} from '../network';
 import FormInput from './Styling/FormInput';
 import Button from './Styling/Button';
-import { Cat } from '../api';
 import H3 from './Styling/H3';
+import CatFromAxios from '../Interfaces/CatFromAxios';
 
 const { REACT_APP_LOGGED_IN_USER } = process.env;
 
 function CatProfile() {
 	const [catName, setCatName] = useState<string>('');
-	const [catPicture, setCatPicture] = useState<string>('');
-	const [catDescription, setCatDescription] = useState<string>('');
-	const [catProfiles, setCatProfiles] = useState<Cat[]>([]);
+	const [catPicture, setCatPicture] = useState<string | null>('');
+	const [catDescription, setCatDescription] = useState<string | null>('');
+	const [catProfiles, setCatProfiles] = useState<CatFromAxios[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [message, setMessage] = useState<string>('');
 
@@ -23,7 +27,7 @@ function CatProfile() {
 					const profile = fetchedProfiles[0];
 					setCatProfiles(fetchedProfiles);
 					setCatName(profile.name);
-					setCatPicture(profile.pictureurl);
+					setCatPicture(profile.picture_url);
 					setCatDescription(profile.description);
 				}
 				setIsLoading(false);
@@ -49,10 +53,10 @@ function CatProfile() {
 	};
 
 	const handleSavedChanges = () => {
-		const updatedProfile = {
+		const updatedProfile: CatFromAxios = {
 			id: catProfiles[0]?.id,
 			name: catName,
-			pictureurl: catPicture,
+			picture_url: catPicture,
 			description: catDescription,
 			device_id: catProfiles[0].device_id,
 			owner_id: catProfiles[0].owner_id,
@@ -89,9 +93,7 @@ function CatProfile() {
 
 	return (
 		<div className="w-72 p-20 m-auto bg-emerald-100	">
-			<H3 className="text-2xl font-bold text-red-950	mb-20">
-				Cat&apos;s Profile
-			</H3>
+			<H3>Cat&apos;s Profile</H3>
 			{message && (
 				<div
 					className={`text-2xl font-bold  mb-20
@@ -115,14 +117,14 @@ function CatProfile() {
 					label="Picture"
 					type="text"
 					name="pictureurl"
-					value={catPicture}
+					value={catPicture ?? ''}
 					onChange={handleProfileEditBy}
 				/>
 				<FormInput
 					label="Description"
 					type="text"
 					name="description"
-					value={catDescription}
+					value={catDescription ?? ''}
 					onChange={handleProfileEditBy}
 				/>
 				<Button type="submit" onClick={handleSavedChanges}>
