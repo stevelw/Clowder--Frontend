@@ -6,7 +6,7 @@ import H2 from './Styling/H2';
 import Button from './Styling/Button';
 
 export default function Login() {
-	const { setUsername, setHome } = useContext(UserContext);
+	const { setUsername, setUserId, setHome } = useContext(UserContext);
 	const [formUsername, setFormUsername] = useState<string>('');
 	const [latitude, setLatitude] = useState<string>('');
 	const [longitude, setLongitude] = useState<string>('');
@@ -28,6 +28,7 @@ export default function Login() {
 		// For demo
 
 		setUsername('user1');
+		setUserId('cm3op7iwu0000jrcqa60tc9kv');
 		// return registerUser(formUsername).then(
 		// 	(newUser: null | { username: string }) => {
 		// 		if (!newUser) {
