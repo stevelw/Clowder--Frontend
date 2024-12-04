@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import CatProfile from './CatProfile';
 import H2 from './Styling/H2';
 import ModalPopover from './Styling/ModalPopover';
-import Cat from '../Interfaces/Cat';
-import Card from './Styling/Card';
 import { getCatsProfiles } from '../network';
 import { UserContext } from '../Contexts/UserContext';
 import CatFromAxios from '../Interfaces/CatFromAxios';
