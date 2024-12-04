@@ -7,5 +7,12 @@ interface Props {
 }
 
 export default function CatCard({ cat }: Props) {
-	return <Card heading={cat.name}></Card>;
+	return (
+		<Card heading={cat.name}>
+			<div className="flex justify-between">
+				<img src={cat.picture_url ?? ''} alt={cat.name} className="w-20" />
+				<p>{cat.description ?? 'A good kitty'}</p>
+			</div>
+		</Card>
+	);
 }
