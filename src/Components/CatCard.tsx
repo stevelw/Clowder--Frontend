@@ -11,6 +11,10 @@ export default function CatCard({ cat }: Props) {
 		<Card heading={cat.name}>
 			<div className="flex justify-between">
 				<img src={cat.picture_url ?? ''} alt={cat.name} className="w-20" />
+				<div>
+					<p>Level: {cat.battle_profile.level.toString()}</p>
+					<p>XP: {cat.battle_profile.xp.toString()}</p>
+				</div>
 				<p>{cat.description ?? 'A good kitty'}</p>
 			</div>
 		</Card>
