@@ -7,9 +7,11 @@ interface Props {
 
 export default function FormElement({ label, children }: Props) {
 	return (
-		<label className="font-bold m-5">
-			{label}
-			{children}
-		</label>
+		<div className="inline-block">
+			<label className="font-bold m-5">
+				{label}
+				{children}
+			</label>
+		</div>
 	);
 }
