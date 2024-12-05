@@ -4,6 +4,7 @@ import { UserContext } from '../Contexts/UserContext';
 import FormInput from './Styling/FormInput';
 import H2 from './Styling/H2';
 import Button from './Styling/Button';
+import ModalPopover from './Styling/ModalPopover';
 
 export default function Login() {
 	const { setUsername, setHome } = useContext(UserContext);
@@ -43,43 +44,48 @@ export default function Login() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<FormInput
-				label="User"
-				type="text"
-				name="username"
-				placeholder="Username"
-				value={formUsername}
-				onChange={({ target: { value } }) => setFormUsername(value)}
-			/>
-			<section>
-				<H2>Home Location</H2>
-				<FormInput
-					label="Lat."
-					type="text"
-					name="latitude"
-					placeholder="Latitude"
-					value={latitude}
-					onChange={({ target: { value } }) => setLatitude(value)}
-				/>
-				<FormInput
-					label="Long."
-					type="text"
-					name="longitude"
-					placeholder="Longitude"
-					value={longitude}
-					onChange={({ target: { value } }) => setLongitude(value)}
-				/>
-			</section>
-			{errorMessage && <p>{errorMessage}</p>}
-			<Button
-				type="submit"
-				disabled={
-					!formUsername || !isValidLat(latitude) || !isValidLong(longitude)
-				}
-			>
-				Create User
-			</Button>
-		</form>
+		<>
+			<ModalPopover>
+				<H2>Login</H2>
+				<form onSubmit={handleSubmit}>
+					<FormInput
+						label="User"
+						type="text"
+						name="username"
+						placeholder="Username"
+						value={formUsername}
+						onChange={({ target: { value } }) => setFormUsername(value)}
+					/>
+					<section>
+						<H2>Home Location</H2>
+						<FormInput
+							label="Lat."
+							type="text"
+							name="latitude"
+							placeholder="Latitude"
+							value={latitude}
+							onChange={({ target: { value } }) => setLatitude(value)}
+						/>
+						<FormInput
+							label="Long."
+							type="text"
+							name="longitude"
+							placeholder="Longitude"
+							value={longitude}
+							onChange={({ target: { value } }) => setLongitude(value)}
+						/>
+					</section>
+					{errorMessage && <p>{errorMessage}</p>}
+					<Button
+						type="submit"
+						disabled={
+							!formUsername || !isValidLat(latitude) || !isValidLong(longitude)
+						}
+					>
+						Create User
+					</Button>
+				</form>
+			</ModalPopover>
+		</>
 	);
 }
