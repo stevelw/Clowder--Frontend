@@ -63,6 +63,7 @@ function CatProfile() {
 			updated_at: new Date().toISOString(),
 			created_at: new Date().toISOString(),
 			deleted_at: null,
+			battle_profile: catProfiles[0].battle_profile,
 		};
 		updateCatProfile(updatedProfile)
 			.then(() => {
