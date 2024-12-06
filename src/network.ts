@@ -110,3 +110,30 @@ export function getCatsNear(
 			return cats;
 		});
 }
+
+export const deleteCatProfile = (
+	id: string
+): Promise<void | CatFromAxios[]> => {
+	return network
+		.delete(`/api/users/${id}/cats`)
+		.then(() => {
+			console.log('Cats profile has been deleted');
+		})
+		.catch((error) => {
+			console.log('Cats profile hasnt been deleted');
+		});
+};
+
+export const updateCatProfile = (
+	updatedProfile: CatFromAxios
+): Promise<void | CatFromAxios[]> => {
+	return network
+		.post(`/api/cats/update`, updatedProfile)
+		.then(({ data: { data: updatedProfile } }) => {
+			return updatedProfile;
+		})
+		.catch((error) => {
+			console.log(error);
+			return [];
+		});
+};
