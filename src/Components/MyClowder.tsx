@@ -22,7 +22,11 @@ export default function MyClowder() {
 		}
 	}, [userId]);
 
-	return (
+	return selectedCat ? (
+		<ModalPopover>
+			<CatProfile></CatProfile>
+		</ModalPopover>
+	) : (
 		<>
 			<H2>My Clowder</H2>
 			<ul>
@@ -32,11 +36,6 @@ export default function MyClowder() {
 					</li>
 				))}
 			</ul>
-			{selectedCat && (
-				<ModalPopover>
-					<CatProfile></CatProfile>
-				</ModalPopover>
-			)}
 		</>
 	);
 }
