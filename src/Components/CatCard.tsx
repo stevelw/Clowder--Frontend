@@ -4,6 +4,7 @@ import Card from './Styling/Card';
 
 interface Props {
 	cat: CatFromAxios;
+	setSelectedCat: React.Dispatch<React.SetStateAction<CatFromAxios | null>>;
 }
 
 export default function CatCard({ cat }: Props) {
