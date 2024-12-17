@@ -20,7 +20,7 @@ export default function FormInput({
 	return (
 		<FormElement label={label}>
 			<input
-				className="m-5 shadow-inner bg-gray-200 p-2 rounded-xl max-w-40 sm:max-w-none"
+				className="mx-5 mb-5 shadow-inner bg-gray-200 p-2 rounded-xl max-w-40 sm:max-w-none"
 				type={type}
 				name={name}
 				value={value}

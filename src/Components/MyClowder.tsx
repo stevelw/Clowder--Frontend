@@ -22,20 +22,22 @@ export default function MyClowder() {
 		}
 	}, [userId]);
 
-	return selectedCat ? (
-		<ModalPopover>
-			<CatProfile />
-		</ModalPopover>
-	) : (
+	return (
 		<>
 			<H2>My Clowder</H2>
-			<ul>
-				{myCats.map((cat) => (
-					<li key={cat.id}>
-						<CatCard cat={cat} setSelectedCat={setSelectedCat} />
-					</li>
-				))}
-			</ul>
+			{selectedCat ? (
+				<ModalPopover>
+					<CatProfile selectedCat={selectedCat}></CatProfile>
+				</ModalPopover>
+			) : (
+				<ul>
+					{myCats.map((cat) => (
+						<li key={cat.id}>
+							<CatCard cat={cat} setSelectedCat={setSelectedCat} />
+						</li>
+					))}
+				</ul>
+			)}
 		</>
 	);
 }
