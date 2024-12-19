@@ -12,11 +12,11 @@ interface Props {
 export default function CatCard({ cat, setSelectedCat }: Props) {
 	return (
 		<Card heading={cat.name}>
-			<div className="flex justify-between h-10 sm:h-32">
+			<div className="flex justify-between h-10 sm:h-16">
 				<img
 					src={cat.picture_url ?? ''}
 					alt={cat.name}
-					className="w-10 h-10 sm:w-32 sm:h-32"
+					className="w-10 h-10 sm:w-16 sm:h-16"
 				/>
 				<div>
 					<p>Level: {cat.battle_profile.level.toString()}</p>
