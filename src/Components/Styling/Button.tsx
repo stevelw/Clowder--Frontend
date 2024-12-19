@@ -13,14 +13,28 @@ export default function Button({
 	onClick,
 	disabled,
 }: Props) {
+	let colour = 'bg-blue-500';
+	switch (children) {
+		case 'Submit':
+			colour = 'bg-green-500';
+			break;
+		case 'Delete':
+			colour = 'bg-red-500';
+			break;
+		default:
+			break;
+	}
+
 	return (
 		<button
 			type={type}
 			onClick={onClick}
 			disabled={disabled}
-			className="bg-blue-500 text-white
-			text-base border-none rounded-xl cursor-pointer h-10 mx-auto my-5 p-2
-			block disabled:bg-gray-200"
+			className={
+				'text-white text-base border-none rounded-xl cursor-pointer h-10 mx-auto my-5 p-2 block disabled:bg-gray-200' +
+				' ' +
+				colour
+			}
 		>
 			{children}
 		</button>

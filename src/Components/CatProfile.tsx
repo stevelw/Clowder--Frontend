@@ -13,28 +13,24 @@ import Messages from './Styling/Messages';
 
 const { REACT_APP_LOGGED_IN_USER } = process.env;
 
-function CatProfile() {
+interface Props {
+	selectedCat: CatFromAxios;
+}
+
+function CatProfile({ selectedCat }: Props) {
 	const [catName, setCatName] = useState<string>('');
 	const [catPicture, setCatPicture] = useState<string | null>('');
 	const [catDescription, setCatDescription] = useState<string | null>('');
 	const [catProfiles, setCatProfiles] = useState<CatFromAxios[]>([]);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [message, setMessage] = useState<string>('');
 
 	useEffect(() => {
-		getCatsProfiles(REACT_APP_LOGGED_IN_USER as string).then(
-			(fetchedProfiles) => {
-				if (Array.isArray(fetchedProfiles) && fetchedProfiles.length > 0) {
-					const profile = fetchedProfiles[0];
-					setCatProfiles(fetchedProfiles);
-					setCatName(profile.name);
-					setCatPicture(profile.picture_url);
-					setCatDescription(profile.description);
-				}
-				setIsLoading(false);
-			}
-		);
-	}, []);
+		setCatName(selectedCat.name);
+		setCatPicture(selectedCat.picture_url);
+		setCatDescription(selectedCat.description);
+		setCatProfiles([selectedCat]);
+	}, [selectedCat]);
 
 	if (isLoading) {
 		return <p>Loading...</p>;
@@ -93,8 +89,8 @@ function CatProfile() {
 	};
 
 	return (
-		<div className="w-72 p-20 m-auto bg-emerald-100	">
-			<H3>Cat&apos;s Profile</H3>
+		<>
+			<H3>{selectedCat.name}&apos;s Profile</H3>
 			{message && (
 				<>
 					{message === 'Updates have been saved' && (
@@ -111,7 +107,7 @@ function CatProfile() {
 					)}
 				</>
 			)}
-			<div className="flex flex-col">
+			<form>
 				<FormInput
 					label="Name"
 					type="text"
@@ -133,12 +129,14 @@ function CatProfile() {
 					value={catDescription ?? ''}
 					onChange={handleProfileEditBy}
 				/>
-				<Button type="submit" onClick={handleSavedChanges}>
-					Submit
-				</Button>
-				<Button onClick={handleDeleteProfile}>Delete</Button>
-			</div>
-		</div>
+				<div className="flex">
+					<Button type="submit" onClick={handleSavedChanges}>
+						Submit
+					</Button>
+					<Button onClick={handleDeleteProfile}>Delete</Button>
+				</div>
+			</form>
+		</>
 	);
 }
 export default CatProfile;
