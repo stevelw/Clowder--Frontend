@@ -24,7 +24,7 @@ export default function MyClowder() {
 
 	return selectedCat ? (
 		<ModalPopover>
-			<CatProfile></CatProfile>
+			<CatProfile />
 		</ModalPopover>
 	) : (
 		<>
