@@ -36,6 +36,9 @@
 		"typescript": "^4",
 		"typescript-eslint": "^8.17.0"
 	},
+	"overrides": {
+		"postcss": ">=8.4.31"
+	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
