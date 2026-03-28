@@ -34,7 +34,7 @@
 		"react-scripts": "^0.0.0",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^4",
-		"typescript-eslint": "^8.50.1"
+		"typescript-eslint": "^8.51.0"
 	},
 	"overrides": {
 		"postcss": ">=8.4.31",
